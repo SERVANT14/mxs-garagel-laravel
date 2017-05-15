@@ -1,0 +1,55 @@
+<form role="form" @submit.prevent="submitForm">
+    <v-alert success :value="registered">
+        Your account has been created.
+    </v-alert>
+
+    <v-row v-if="!registered" class="mt-5">
+        <v-col xs12 md7 offset-md3>
+            <v-card>
+                <v-card-row class="grey lighten-3">
+                    <v-card-title>
+                        <span>Register</span>
+                    </v-card-title>
+                </v-card-row>
+
+                <v-card-text>
+                    <v-text-field
+                            label="Name"
+                            required
+                            autofocus
+                            v-model="formData.name"
+                            prepend-icon="person"
+                    ></v-text-field>
+
+                    <v-text-field
+                            type="email"
+                            label="Email"
+                            required
+                            v-model="formData.email"
+                            prepend-icon="email"
+                    ></v-text-field>
+
+                    <v-text-field
+                            type="password"
+                            label="Password"
+                            required
+                            v-model="formData.password"
+                            prepend-icon="lock_open"
+                    ></v-text-field>
+
+                    <v-text-field
+                            type="password"
+                            label="Confirm Password"
+                            required
+                            v-model="formData.password_confirmation"
+                            prepend-icon="lock_open"
+                    ></v-text-field>
+
+                    <v-btn primary type="submit" :loading="registering">
+                        Register
+                    </v-btn>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
+</form>

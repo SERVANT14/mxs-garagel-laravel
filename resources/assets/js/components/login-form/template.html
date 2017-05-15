@@ -1,0 +1,48 @@
+<form role="form" @submit.prevent="submitForm">
+    <v-alert success :value="loggedIn">
+        You are now logged in.
+    </v-alert>
+
+    <v-row v-if="!loggedIn" class="mt-5">
+        <v-col md7 xs12 offset-md3>
+            <v-card>
+                <v-card-row class="grey lighten-3">
+                    <v-card-title>
+                        <span>Login</span>
+                    </v-card-title>
+                </v-card-row>
+
+                <v-card-text>
+                    <v-text-field
+                            type="email"
+                            label="Email"
+                            required
+                            autofocus
+                            prepend-icon="email"
+                            v-model="formData.email"
+                    ></v-text-field>
+
+                    <v-text-field
+                            type="password"
+                            label="Password"
+                            required
+                            prepend-icon="lock_open"
+                            v-model="formData.password"
+                    ></v-text-field>
+
+                    <v-checkbox
+                            label="Remember me"
+                            v-model="formData.remember"
+                    ></v-checkbox>
+
+                    <v-btn primary type="submit" :loading="loggingIn">
+                        Login
+                    </v-btn>
+                    <v-btn tag="a" secondary :href="resetPasswordUrl" :disabled="loggingIn">
+                        Forgot Password?
+                    </v-btn>
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
+</form>

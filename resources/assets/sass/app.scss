@@ -1,9 +1,13 @@
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
-// Variables
-@import "variables";
+// Vuetify
+@import "../../../node_modules/vuetify/dist/vuetify.min.css";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.toolbar__title a {
+  color: white;
+  text-decoration: none;
+}
