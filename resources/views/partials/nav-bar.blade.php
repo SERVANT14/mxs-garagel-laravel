@@ -1,4 +1,4 @@
-<v-toolbar class="indigo accent-3">
+<v-toolbar class="indigo accent-3 mb-4">
     <v-toolbar-title>
         <a href="{{ route('welcome') }}">MXS Garage</a>
     </v-toolbar-title>

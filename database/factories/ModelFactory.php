@@ -22,3 +22,22 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Services\Tracks\Models\Track::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'description' => $faker->paragraph,
+        'download_links' => ['link' => 'http://forum.mxsimulator.com', 'description' => 'HD'],
+        'released_on' => \Carbon\Carbon::yesterday(),
+        'creator_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
+        'category_id' => function () {
+            return factory(\App\Services\Tracks\Models\TrackCategory::class)->create()->id;
+        }
+    ];
+});
+
+$factory->define(App\Services\Tracks\Models\TrackCategory::class, function (Faker\Generator $faker) {
+    return ['name' => $faker->name];
+});
