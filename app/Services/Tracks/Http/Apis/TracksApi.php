@@ -2,9 +2,12 @@
 
 namespace App\Services\Tracks\Http\Apis;
 
+use App\Services\Tracks\Models\Track;
 use App\Services\Tracks\Repositories\TracksRepository;
 use Illuminate\Http\Request;
+use App\Services\Tracks\Http\Requests\Track as TrackRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TracksApi extends Controller
 {
@@ -36,24 +39,14 @@ class TracksApi extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param TrackRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TrackRequest $request)
     {
-        //
+        return $this->tracksRepo->create($request);
     }
 
     /**
@@ -68,36 +61,31 @@ class TracksApi extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param TrackRequest $request
+     * @param Track $track
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TrackRequest $request, Track $track)
     {
-        //
+        return $this->tracksRepo->update($track, $request);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Track $track
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Track $track)
     {
-        //
+        abort_if(Auth::guest() || Auth::user()->cannot('manage', $track), 403);
+
+        $this->tracksRepo->delete($track);
+
+        return ['deleted' => true];
     }
 }

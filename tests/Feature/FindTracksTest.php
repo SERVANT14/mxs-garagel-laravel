@@ -90,7 +90,9 @@ class FindTracks extends TestCase
     function user_can_view_a_track()
     {
         // Arrange
-        $track = factory(Track::class)->create();
+        $track = factory(Track::class)->create([
+            'download_links' => ['link' => 'http://example.com', 'description' => 'Ultra Resolution']
+        ]);
 
         // Execute
         $response = $this->getJson('api/tracks/' . $track->getKey());
@@ -98,7 +100,7 @@ class FindTracks extends TestCase
         // Check
         $response->assertJsonFragment(['name' => $track->name]);
         $response->assertJsonStructure([
-            'download_links',
+            'download_links' => ['link'],
             'description',
             'creator' => 'name',
             'category' => 'name',

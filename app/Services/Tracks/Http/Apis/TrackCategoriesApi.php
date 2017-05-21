@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Services\Tracks\Http\Controllers;
+namespace App\Services\Tracks\Http\Apis;
 
-use App\Services\Tracks\Http\Apis\TracksApi;
+use App\Services\Tracks\Repositories\TrackCategoriesRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TracksController extends Controller
+class TrackCategoriesApi extends Controller
 {
     /**
-     * @var TracksApi
+     * @var TrackCategoriesRepository
      */
-    protected $api;
+    protected $categoriesRepo;
 
     /**
-     * TracksController constructor.
+     * TrackCategoriesApi constructor.
      *
-     * @param TracksApi $api
+     * @param TrackCategoriesRepository $categoriesRepo
      */
-    public function __construct(TracksApi $api)
+    public function __construct(TrackCategoriesRepository $categoriesRepo)
     {
-        $this->api = $api;
+        $this->categoriesRepo = $categoriesRepo;
     }
 
     /**
@@ -30,7 +30,7 @@ class TracksController extends Controller
      */
     public function index()
     {
-        return view('tracks.index');
+        return $this->categoriesRepo->queryBy()->get();
     }
 
     /**
@@ -40,18 +40,29 @@ class TracksController extends Controller
      */
     public function create()
     {
-        return view('tracks.create');
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return view('tracks.show', compact('id'));
+        //
     }
 
     /**

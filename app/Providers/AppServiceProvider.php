@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Tracks\Models\Observers\TrackObserver;
+use App\Services\Tracks\Models\Track;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
 
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Track::observe(TrackObserver::class);
     }
 
     /**
